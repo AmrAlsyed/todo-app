@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>jQuery Dynamic List (Bonus Task)</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f6f8fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        width: 360px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      }
+
+      h2 {
+        margin: 0 0 12px 0;
+        font-size: 18px;
+        text-align: center;
+        color: #111827;
+      }
+
+      .error {
+        display: none;
+        background: #ef4444;
+        color: white;
+        padding: 8px 10px;
+        border-radius: 6px;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      .input-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      input[type="text"] {
+        flex: 1;
+        padding: 8px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+
+      button {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      button:active { transform: translateY(1px); }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 14px 0 0 0;
+      }
+
+      li {
+        background: #f3f4f6;
+        margin-bottom: 8px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .delete-btn {
+        background: #ef4444;
+        color: white;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Dynamic List (jQuery)</h2>
+
+      <div class="error" id="errorBox">Please enter an item before adding.</div>
+
+      <div class="input-row">
+        <input id="itemInput" type="text" placeholder="Enter an item..." />
+        <button id="addBtn">Add</button>
+      </div>
+
+      <ul id="itemList"></ul>
+    </div>
+
+    <script>
+      $(function () {
+        const $input = $("#itemInput");
+        const $list = $("#itemList");
+        const $error = $("#errorBox");
+
+        function showError(msg) {
+          $error.text(msg);
+          // show then fade out after 2s
+          $error.stop(true, true).fadeIn(160).delay(2000).fadeOut(300);
+        }
+
+        $("#addBtn").on("click", function () {
+          const text = $input.val().trim();
+          if (!text) {
+            showError("Please enter an item before adding.");
+            return;
+          }
+
+          const $li = $(`
+            <li>
+              <span class="item-text"></span>
+              <button class="delete-btn">Delete</button>
+            </li>
+          `);
+          $li.find(".item-text").text(text);
+
+          // append with fade-in
+          $list.append($li.hide().fadeIn(200));
+          $input.val("").focus();
+        });
+
+        // delegated handler for delete (works for future items)
+        $list.on("click", ".delete-btn", function () {
+          $(this).closest("li").fadeOut(200, function () {
+            $(this).remove();
+          });
+        });
+
+        // allow Enter key to add
+        $input.on("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            $("#addBtn").trigger("click");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
