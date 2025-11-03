@@ -9,6 +9,7 @@ A responsive Todo App built with Next.js, featuring drag-and-drop, infinite scro
 - Infinite scroll in each column
 - Search tasks by title/description
 - Add, edit, delete tasks
+- **Bonus**: jQuery dynamic list with fade animations (`/public/bonus.html`)
 
 ## Tech Stack
 
