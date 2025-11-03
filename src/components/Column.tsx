@@ -38,19 +38,12 @@ export default function Column({ columnId, title }: ColumnProps) {
     queryKey: ["tasks", columnId],
     queryFn: async ({ pageParam = 1 }) => {
       const res = await api.get(
-        `/tasks?column=${columnId}&_page=${pageParam}&_per_page=${TASKS_PER_PAGE}&_sort=position&_order=asc`
+        `/tasks?column=${columnId}&_page=${pageParam}&_limit=${TASKS_PER_PAGE}&_sort=position&_order=asc`
       );
 
-      let tasks: Task[];
-      let hasMore: boolean;
-
-      if (Array.isArray(res.data)) {
-        tasks = res.data;
-        hasMore = res.data.length === TASKS_PER_PAGE;
-      } else {
-        tasks = res.data.data || [];
-        hasMore = res.data.next !== null;
-      }
+      // v0.17.4 always returns arrays directly
+      const tasks: Task[] = res.data;
+      const hasMore: boolean = tasks.length === TASKS_PER_PAGE;
 
       return {
         tasks,

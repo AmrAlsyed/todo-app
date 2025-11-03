@@ -40,7 +40,7 @@
       "title": "task11",
       "description": "task",
       "column": "backlog",
-      "position": 327680
+      "position": 360473
     },
     {
       "id": "1762131866668",
@@ -53,8 +53,8 @@
       "id": "1762091466668",
       "title": "task14",
       "description": "task",
-      "column": "backlog",
-      "position": 196614
+      "column": "review",
+      "position": 131072
     },
     {
       "id": "1762092098772",
