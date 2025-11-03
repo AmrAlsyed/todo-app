@@ -4,7 +4,7 @@ A responsive Todo App built with Next.js, featuring drag-and-drop, infinite scro
 
 ## Features
 
-- 4-column (Backlog, In Progress, Review, Done)
+- 4-column board (Backlog, In Progress, Review, Done)
 - Drag & drop tasks between columns
 - Infinite scroll in each column
 - Search tasks by title/description
@@ -18,12 +18,17 @@ A responsive Todo App built with Next.js, featuring drag-and-drop, infinite scro
 
 ## Setup
 
-1. Clone repo: `git clone [your-repo]`
-2. Install: `npm install`
-3. Start json-server: `npm run server` (runs on :4000)
-4. Start dev: `npm run dev` (runs on :3000)
+1. Clone repo: `git clone https://github.com/AmrAlsyed/todo-app.git`
+2. Install dependencies: `npm install`
+3. Create `.env.local` file in the root directory with:NEXT_PUBLIC_API_BASE_URL=http://localhost:4000
+4. Start json-server: `npm run server` (runs on :4000)
+5. Start development server: `npm run dev` (runs on :3000)
 
 ## Deployment
 
-- Frontend: Vercel/Netlify
-- API: json-server (mock) or connect to real API
+- Frontend: Vercel
+- API: json-server (mock), cPanel (live)
+
+## Live Demo
+
+https://todo-app-peach-mu.vercel.app
